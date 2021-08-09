@@ -25,7 +25,7 @@ String loadstring = "";
 String processcmd = "";
 String bzmtoken;
 ConfigFileReader configFileReader;
-
+String testexecutionname = "";
 	
    @Given("^API Query ([^\"]*)$") 
    public void URL(String url){
@@ -62,7 +62,8 @@ ConfigFileReader configFileReader;
    @Then("^Response is ([^\"]*)$") 
    public void responsestatus(String status) throws IOException { 
 	   try {
-       FileWriter myWriter = new FileWriter("filename.txt");
+	   testexecutionname = System.currentTimeMillis()+".yaml";
+	   FileWriter myWriter = new FileWriter(testexecutionname);
        TaurusFile = ("execution:\r\n"
        		+ "  concurrency: "+concurrentvariable+"\r\n"
        		+ "  hold-for: 1m\r\n"
@@ -98,7 +99,7 @@ ConfigFileReader configFileReader;
 
 	       System.out.println("Load String = " + loadstring);
 	       
-	        processBuilder.command("bzt.exe", "filename.txt"+ loadstring );
+	        processBuilder.command("bzt.exe", testexecutionname + loadstring );
 
 	        try {
 
@@ -114,7 +115,7 @@ ConfigFileReader configFileReader;
 
 	            int exitCode = process.waitFor();
 	            System.out.println("\nExited with error code : " + exitCode);
-	            File myObj = new File("filename.txt"); 
+	            File myObj = new File(testexecutionname); 
 	            if (myObj.delete()) { 
 	              System.out.println("Deleted the file: " + myObj.getName());
 	            } else {

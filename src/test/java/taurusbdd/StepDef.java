@@ -30,7 +30,7 @@ String testexecutionname = "";
    @Given("^API Query ([^\"]*)$") 
    public void URL(String url){
 	   urlvariable = url ;
-       System.out.println("URL = " + url );
+ //      System.out.println("URL = " + url );
        
    } 
    
@@ -43,14 +43,13 @@ String testexecutionname = "";
    public void loadsettings(){
 	   configFileReader= new ConfigFileReader();
 	   bzmtoken = configFileReader.getbzmtoken();
-       System.out.println("Token Value = " + bzmtoken );
 	   loadstring = ", \"-o modules.blazemeter.token="+bzmtoken+" -cloud\"";
    }
    
    @And("^([^\"]*) users connect$")
    public void Concurrency(String concurrency){
 	   concurrentvariable = concurrency ;
-       System.out.println("Concurrency Value = " + concurrency ); 
+//       System.out.println("Concurrency Value = " + concurrency ); 
 
    }
    
@@ -97,7 +96,7 @@ String testexecutionname = "";
      }
 	     ProcessBuilder processBuilder = new ProcessBuilder();
 
-	       System.out.println("Load String = " + loadstring);
+	 //      System.out.println("Load String = " + loadstring);
 	       
 	        processBuilder.command("bzt.exe", testexecutionname + loadstring );
 

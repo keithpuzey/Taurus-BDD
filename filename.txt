@@ -1,0 +1,23 @@
+execution:
+  concurrency: 15
+  hold-for: 1m
+  ramp-up: 10s
+  scenario: Thread Group
+
+scenarios:
+  Thread Group:
+    requests:
+    - label: blazedemo
+      method: GET
+      url: http://dbankdemo.com/bank/
+reporting:
+- module: final-stats
+  summary: true  # overall samples count and percent of failures
+  percentiles: false  # display average times and percentiles
+  summary-labels: false # provides list of sample labels, status, percentage of completed, avg time and errors
+  failed-labels: false  # provides list of sample labels with failures
+  test-duration: false  # provides test duration
+- module: blazemeter
+- module: passfail
+  criteria:
+    Response Time Does not match requirements : avg-rt >3s for 5s, stop as failed
